@@ -1,0 +1,29 @@
+services:
+  # Backend Web Service
+  - type: web
+    name: groundwater-backend
+    env: python
+    region: singapore
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn -k gevent -w 1 app:app
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: PYTHON_VERSION
+        value: 3.9.0
+
+  # Frontend Static Site
+  - type: web
+    name: groundwater-frontend
+    env: static
+    region: singapore
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: groundwater-backend
+          property: url
