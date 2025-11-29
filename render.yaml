@@ -2,16 +2,16 @@ services:
   # Backend Web Service
   - type: web
     name: groundwater-backend
-    env: python
+    env: node
     region: singapore
     plan: free
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: cd backend && gunicorn -k gevent -w 1 app:app
+    buildCommand: cd backend-node && npm install
+    startCommand: cd backend-node && npm start
     envVars:
       - key: PORT
         value: 10000
-      - key: PYTHON_VERSION
-        value: 3.9.0
+      - key: NODE_VERSION
+        value: 18.0.0
 
   # Frontend Static Site
   - type: web

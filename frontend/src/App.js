@@ -21,6 +21,7 @@ import Sidebar from './components/Sidebar';
 import MetricsPanel from './components/MetricsPanel';
 import TrendsPanel from './components/TrendsPanel';
 import ContextPanel from './components/ContextPanel';
+import NotesPanel from './components/NotesPanel';
 import SOSModal from './components/SOSModal';
 
 import NotificationCenter from './components/NotificationCenter';
@@ -41,7 +42,7 @@ ChartJS.register(
   Filler
 );
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5002';
 
 function App() {
   const [regions, setRegions] = useState([]);
@@ -395,6 +396,8 @@ function App() {
             saveThreshold={saveThreshold}
             selectedRegion={selectedRegion}
           />
+
+          <NotesPanel selectedRegion={selectedRegion} />
         </section>
       </main>
 
